@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Tasks</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+
+<body>
+
+    <h1>Tasks</h1>
+    <hr>
+    <div id="tasks-container">
+
+    </div>
+
+</body>
+
+<script>
+    let tasksContainer = document.getElementById('tasks-container')
+
+    let getTasks = async () => {
+        let response = await fetch('http://127.0.0.1:8000/api/tasks/')
+        let tasks = await response.json()
+
+        for (let i = 0; tasks.length > i; i++) {
+            let task = tasks[i]
+
+            let row = `<div>
+                            <h3> Task id: ${task.id}</h3>
+                            <h3> Task name: ${task.name}</h3>
+                            <h3> Task description: ${task.description}</h3>
+                            <h3> Due date: ${task.duedate}</h3>
+                            <hr>
+                        </div>`
+
+            tasksContainer.innerHTML += row
+        }
+    }
+
+    getTasks()
+</script>
+
+</html>

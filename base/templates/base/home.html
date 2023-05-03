@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+<div>
+    
+
+    <!-- прописать условие -->
+    <h5>Overall {{task_number}} tasks </h5>
+    {% if request.user.creator %}
+    <a href = "{% url 'create-task' %}">Create Task</a>
+    {% endif %}
+    
+    <hr>
+
+    <div>
+        {% for task in tasks %}
+            <div>
+                {% if request.user == task.host and request.user.creator %}
+                <a href = "{% url 'update-task' task.id %}">Edit Task</a>
+                <a href = "{% url 'delete-task' task.id %}">Delete Task</a>
+                {% endif %}
+                
+                <!-- {% if request.user.completer %}
+                <a href = "{% url 'update-task' task.id %}">Edit Task</a>
+                {% endif %} -->
+
+                <span>@{{task.host.username}}</span>
+                <h5>Task number {{task.id}}: <a href = "{% url 'task' task.id %}">{{task.name}}</a> 
+                    </h5>
+                    <!-- <h5>Completed: {{mark.mark}}</h5> -->
+                <hr>
+
+            </div>
+
+        {% endfor %}
+    </div>
+    
+</div>
+
+{% endblock %}

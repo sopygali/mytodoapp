@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div>
+    <h1>Task: {{task.name}}</h1>
+
+    <p>Description of a task:</p>
+    <p>{{task.description}}</p>
+
+
+    <p>Duedate: {{task.duedate}}</p>
+
+    <hr>
+    {% if request.user.completer %}
+    <h5>Did you complete the task? </h5>
+    <p>(will be updated soon...)</p>
+    {% endif %}
+</div>
+
+
+
+
+{% endblock %}
